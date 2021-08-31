@@ -1232,11 +1232,11 @@ type Identify struct {
 // IdentifyProperties contains the "properties" portion of an Identify packet
 // https://discord.com/developers/docs/topics/gateway#identify-identify-connection-properties
 type IdentifyProperties struct {
-	OS              string `json:"$os"`
-	Browser         string `json:"$browser"`
-	Device          string `json:"$device"`
-	Referer         string `json:"$referer"`
-	ReferringDomain string `json:"$referring_domain"`
+	OS              string //`json:"$os"`
+	Browser         string //`json:"$browser"`
+	Device          string //`json:"$device"`
+	Referer         string //`json:"$referer"`
+	ReferringDomain string //`json:"$referring_domain"`
 }
 
 // Constants for the different bit offsets of text channel permissions

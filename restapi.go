@@ -1925,7 +1925,7 @@ func (s *Session) VoiceICE() (st *VoiceICE, err error) {
 
 // Gateway returns the websocket Gateway address
 func (s *Session) Gateway() (gateway string, err error) {
-
+	
 	response, err := s.RequestWithBucketID("GET", EndpointGateway, nil, EndpointGateway)
 	if err != nil {
 		return

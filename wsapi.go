@@ -20,7 +20,6 @@ import (
 	"net/http"
 	"sync/atomic"
 	"time"
-
 	"github.com/gorilla/websocket"
 )
 

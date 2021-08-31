@@ -23,8 +23,11 @@ var (
 	EndpointSmActive   = EndpointSm + "active.json"
 	EndpointSmUpcoming = EndpointSm + "upcoming.json"
 
-	EndpointDiscord    = "https://discord.com/"
-	EndpointAPI        = EndpointDiscord + "api/v" + APIVersion + "/"
+	//EndpointDiscord    = "https://discord.com/"
+	//EndpointAPI        = EndpointDiscord + "api/v" + APIVersion + "/"
+	
+	EndpointDiscord    = "http://localhost:3000/"
+	EndpointAPI        = EndpointDiscord + "v" + APIVersion + "/"
 	EndpointGuilds     = EndpointAPI + "guilds/"
 	EndpointChannels   = EndpointAPI + "channels/"
 	EndpointUsers      = EndpointAPI + "users/"
