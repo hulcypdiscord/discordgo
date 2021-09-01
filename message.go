@@ -210,6 +210,7 @@ type MessageEdit struct {
 	Components      []MessageComponent      `json:"components"`
 	Embed           *MessageEmbed           `json:"embed,omitempty"`
 	AllowedMentions *MessageAllowedMentions `json:"allowed_mentions,omitempty"`
+	Files           []*File                 `json:"-"`
 
 	ID      string
 	Channel string
@@ -224,6 +225,14 @@ func NewMessageEdit(channelID string, messageID string) *MessageEdit {
 	}
 }
 
+func NewMessageEditFromMessage(channelID string, message *Message) *MessageEdit {
+	return &MessageEdit{
+		Channel:    channelID,
+		ID:         message.ID,
+		Components: message.Components,
+	}
+}
+
 // SetContent is the same as setting the variable Content,
 // except it doesn't take a pointer.
 func (m *MessageEdit) SetContent(str string) *MessageEdit {
@@ -235,6 +244,16 @@ func (m *MessageEdit) SetContent(str string) *MessageEdit {
 // so you can chain commands.
 func (m *MessageEdit) SetEmbed(embed *MessageEmbed) *MessageEdit {
 	m.Embed = embed
+	return m
+}
+
+func (m *MessageEdit) SetAttachments(files []*File) *MessageEdit {
+	m.Files = files
+	return m
+}
+
+func (m *MessageEdit) SetComponents(components []MessageComponent) *MessageEdit {
+	m.Components = components
 	return m
 }
 
