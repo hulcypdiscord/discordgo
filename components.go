@@ -12,6 +12,7 @@ const (
 	ActionsRowComponent ComponentType = 1
 	ButtonComponent     ComponentType = 2
 	SelectMenuComponent ComponentType = 3
+	GraphicComponent    ComponentType = 4
 )
 
 // MessageComponent is a base interface for all message components.
@@ -42,6 +43,10 @@ func (umc *unmarshalableMessageComponent) UnmarshalJSON(src []byte) error {
 		data = v
 	case ButtonComponent:
 		v := Button{}
+		err = json.Unmarshal(src, &v)
+		data = v
+	case GraphicComponent:
+		v := Graphic{}
 		err = json.Unmarshal(src, &v)
 		data = v
 	}
@@ -148,6 +153,39 @@ func (b Button) MarshalJSON() ([]byte, error) {
 // Type is a method to get the type of a component.
 func (Button) Type() ComponentType {
 	return ButtonComponent
+}
+
+// Graphic represents graphic component.
+type Graphic struct {
+	Label    string         `json:"label"`
+	Style    ButtonStyle    `json:"style"`
+	Disabled bool           `json:"disabled"`
+	Emoji    ComponentEmoji `json:"emoji"`
+
+	URL      string `json:"url,omitempty"`
+	CustomID string `json:"custom_id,omitempty"`
+}
+
+// MarshalJSON is a method for marshaling Button to a JSON object.
+func (b Graphic) MarshalJSON() ([]byte, error) {
+	type graphic Graphic
+
+	if b.Style == 0 {
+		b.Style = PrimaryButton
+	}
+
+	return json.Marshal(struct {
+		graphic
+		Type ComponentType `json:"type"`
+	}{
+		graphic: graphic(b),
+		Type:    b.Type(),
+	})
+}
+
+// Type is a method to get the type of a component.
+func (Graphic) Type() ComponentType {
+	return GraphicComponent
 }
 
 // SelectMenuOption represents an option for a select menu.
